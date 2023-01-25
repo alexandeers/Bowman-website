@@ -1,94 +1,80 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+// import { RouterLink, RouterView } from "vue-router";
+// import HelloWorld from "./components/HelloWorld.vue";
 import Slot from "./components/Slot.vue";
+import scoreboard from "./assets/scoreboard.json";
+
+//Create an array of players from the scoreboard.json file
+const players = scoreboard.players;
+//Convert players to an array
+const playersArray = Object.keys(players).map((key) => players[key]);
+//Sort the players by points
+const sortedPlayers = playersArray.sort((a, b) => b.points - a.points);
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <nav>
-        <Slot name="Alex" points="50"></Slot>
-        <Slot name="Calle" points="50"></Slot>
-        <Slot name="Daniel" points="50"></Slot>
-      </nav>
-    </div>
-  </header>
-  <RouterView />
+  <div class="main-app">
+    <ul>
+      <li v-for="player in sortedPlayers" :key="player.name">
+        <span>{{ sortedPlayers.indexOf(player) + 1 }}</span>
+        <Slot class="slot"
+          :name="player.name"
+          :points="player.points"
+          :kills="player.kills"
+          :secondsAlive="player.secondsAlive"
+          :damageInflicted="player.damageInflicted"
+          :levelsAttained="player.levelsAttained"/>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.main-app {
   display: flex;
   flex-direction: column;
+  height: auto;
+  width: 40em;
+  padding: auto;
+  align-self: center;
+  margin: auto;
+  padding: auto;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
   gap: 1em;
+  text-align: center;
+  vertical-align: center;
+  height: auto;
+  margin: 0;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+li > span {
+  margin: auto;
+  font-size: 1.5rem;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+ul {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 40em;
+  padding: auto;
+  align-self: center;
+  margin: auto;
+  padding: auto;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.slot {
+  margin-block: 0.5em;
+  flex-basis: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
+  text-align: left;
+  vertical-align: baseline;
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>

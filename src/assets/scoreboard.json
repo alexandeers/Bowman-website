@@ -1,0 +1,36 @@
+{
+    "players": {
+        "alex": {
+            "name": "Alex",
+            "points": 75,
+            "kills": 4,
+            "secondsAlive": 125,
+            "damageInflicted": 100,
+            "levelsAttained": 4
+        },
+        "calle": {
+            "name": "Calle",
+            "points": 50,
+            "kills": 8,
+            "secondsAlive": 75,
+            "damageInflicted": 200,
+            "levelsAttained": 6
+        },
+        "david": {
+            "name": "David",
+            "points": 100,
+            "kills": 2,
+            "secondsAlive": 100,
+            "damageInflicted": 50,
+            "levelsAttained": 2
+        },
+        "erik": {
+            "name": "Erik",
+            "points": 25,
+            "kills": 10,
+            "secondsAlive": 50,
+            "damageInflicted": 300,
+            "levelsAttained": 8
+        }
+    }
+}

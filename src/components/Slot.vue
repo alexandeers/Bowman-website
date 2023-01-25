@@ -4,7 +4,11 @@ import { Collapse } from 'vue-collapsed';
 
 const props = defineProps({
     name: String,
-    points: Number
+    points: Number,
+    kills: Number,
+    secondsAlive: Number,
+    damageInflicted: Number,
+    levelsAttained: Number
 })
 
 const configuration = reactive({
@@ -28,10 +32,10 @@ function ToggleDisplay() {
         <div>
             <Collapse :when="configuration.displayStats" class="v-collapse">
                 <div class="stats" :class="{ scaleStats: configuration.displayStats }">
-                    <div class="stat-display"><span class="text-white">0</span> Kills</div>
-                    <div class="stat-display"><span class="text-white">0</span> Seconds Alive</div>
-                    <div class="stat-display"><span class="text-white">0</span> Damage Inflicted</div>
-                    <div class="stat-display"><span class="text-white">0</span> Levels Attained</div>
+                    <div class="stat-display"><span class="text-white">{{ props.kills }}</span> Kills</div>
+                    <div class="stat-display"><span class="text-white">{{ props.secondsAlive }}</span> Seconds Alive</div>
+                    <div class="stat-display"><span class="text-white">{{ props.damageInflicted }}</span> Damage Inflicted</div>
+                    <div class="stat-display"><span class="text-white">{{ props.levelsAttained }}</span> Levels Attained</div>
                 </div>
             </Collapse>
         </div>
@@ -39,17 +43,6 @@ function ToggleDisplay() {
 </template>
 
 <style scoped>
-
-@keyframes statsDisplayAnimation {
-    from {
-        max-height: 0;
-    }
-
-    to {
-        max-height: 100%;
-    }
-}
-
 .v-collapse {
     transition: height 300ms cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -125,7 +118,6 @@ function ToggleDisplay() {
 }
 
 .main-stats {
-    /* border-bottom: 1px solid white; */
     flex-direction: row;
     font-weight: bold;
     font-size: 2em;
@@ -136,9 +128,8 @@ function ToggleDisplay() {
 
 .main-stat-display {
     margin: 0;
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference; */
     padding-inline: 0.25em;
-
     user-select: none;
 }
 </style>
