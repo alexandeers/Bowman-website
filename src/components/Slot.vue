@@ -31,7 +31,7 @@ function ToggleDisplay() {
 
         <div>
             <Collapse :when="configuration.displayStats" class="v-collapse">
-                <div class="stats" :class="{ scaleStats: configuration.displayStats }">
+                <div class="stats" :class="{ scaleStats: configuration.displayStats, opacity100: configuration.displayStats }">
                     <div class="stat-display"><span class="text-white">{{ props.kills }}</span> Kills</div>
                     <div class="stat-display"><span class="text-white">{{ props.secondsAlive }}</span> Seconds Alive</div>
                     <div class="stat-display"><span class="text-white">{{ props.damageInflicted }}</span> Damage Inflicted</div>
@@ -51,6 +51,10 @@ function ToggleDisplay() {
     border-radius: 1px;
     padding: 0.5em;
     overflow: hidden;
+}
+
+.opacity100 {
+    opacity: 100% !important;
 }
 
 .displayStats::after {
@@ -86,9 +90,9 @@ function ToggleDisplay() {
     bottom: 0;
     left: 0;
 
-    transition: 100ms ease-out;
-    width: 0%;
-    height: 2px;
+    transition: 200ms cubic-bezier(0.33, 1, 0.68, 1);
+    width: 100%;
+    height: 0px;
     background: white;
     z-index: -1;
 }
@@ -99,7 +103,7 @@ function ToggleDisplay() {
 
 .name:hover {
     font-weight: 600;
-    background: transparent;
+    background: hsl(0, 0%, 20%);
     color: white;
 }
 
@@ -108,6 +112,9 @@ function ToggleDisplay() {
     overflow: hidden;
     display: grid;
     gap: 0em;
+    opacity: 0%;
+
+    transition: opacity 300ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .stat-display {

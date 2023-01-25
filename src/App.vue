@@ -13,29 +13,39 @@ const sortedPlayers = playersArray.sort((a, b) => b.points - a.points);
 </script>
 
 <template>
-  <div class="main-app">
-    <ul>
-      <li v-for="player in sortedPlayers" :key="player.name">
-        <span>{{ sortedPlayers.indexOf(player) + 1 }}</span>
-        <Slot class="slot"
-          :name="player.name"
-          :points="player.points"
-          :kills="player.kills"
-          :secondsAlive="player.secondsAlive"
-          :damageInflicted="player.damageInflicted"
-          :levelsAttained="player.levelsAttained"/>
-      </li>
-    </ul>
+  <div>
+    <h1>Leaderboard</h1>
+    <div class="leaderboard">
+      <ul>
+        <li v-for="player in sortedPlayers" :key="player.name">
+          <span>{{ sortedPlayers.indexOf(player) + 1 }}</span>
+          <Slot class="slot"
+            :name="player.name"
+            :points="player.points"
+            :kills="player.kills"
+            :secondsAlive="player.secondsAlive"
+            :damageInflicted="player.damageInflicted"
+            :levelsAttained="player.levelsAttained"/>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <style scoped>
 
-.main-app {
+h1 {
+  font-size: 3rem;
+  margin: auto;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.leaderboard {
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 40em;
+  width: min(100vh, 40em);
   padding: auto;
   align-self: center;
   margin: auto;
