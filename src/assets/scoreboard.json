@@ -25,8 +25,8 @@
             "levelsAttained": 2
         },
         "erik": {
-            "name": "Erik",
-            "points": 25,
+            "name": "Bög",
+            "points": -1000,
             "kills": 10,
             "secondsAlive": 50,
             "damageInflicted": 300,

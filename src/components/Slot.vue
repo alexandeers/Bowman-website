@@ -47,7 +47,7 @@ function ToggleDisplay() {
     transition: height 300ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 .main {
-    outline: 1px solid white;
+    outline: 1px solid var(--color-text);
     border-radius: 1px;
     padding: 0.5em;
     overflow: hidden;

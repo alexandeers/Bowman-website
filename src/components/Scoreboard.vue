@@ -1,42 +1,90 @@
-<script>
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, set, onValue, get } from "firebase/database";
+<script setup>
+// import { RouterLink, RouterView } from "vue-router";
+// import HelloWorld from "./components/HelloWorld.vue";
+import Slot from "./Slot.vue";
+import scoreboard from "C:/Users/04ALSA27/Documents/GitHub/Bowman-website/src/assets/scoreboard.json"
 
-// Configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDH6X1WuGkO2WP6320JhaoFrAVgjsxG208",
-  authDomain: "bowman-1aa81.firebaseapp.com",
-  projectId: "bowman-1aa81",
-  storageBucket: "bowman-1aa81.appspot.com",
-  messagingSenderId: "941433140198",
-  appId: "1:941433140198:web:02b1eb12ad1e22976c5c27",
-  measurementId: "G-7EBJDJH4Y7"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const dbRef = ref(getDatabase());
-
-async function readScoreboard() {
-  return get(child(dbRef, `users/${userId}`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
-}
+//Create an array of players from the scoreboard.json file
+const players = scoreboard.players;
+//Convert players to an array
+const playersArray = Object.keys(players).map((key) => players[key]);
+//Sort the players by points
+const sortedPlayers = playersArray.sort((a, b) => b.points - a.points);
 </script>
 
 <template>
-
+  <div>
+    <h1>Leaderboard</h1>
+    <div class="leaderboard">
+      <ul>
+        <li v-for="player in sortedPlayers" :key="player.name">
+          <span>{{ sortedPlayers.indexOf(player) + 1 }}</span>
+          <Slot class="slot"
+            :name="player.name"
+            :points="player.points"
+            :kills="player.kills"
+            :secondsAlive="player.secondsAlive"
+            :damageInflicted="player.damageInflicted"
+            :levelsAttained="player.levelsAttained"/>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
-<style>
+<style scoped>
 
+h1 {
+  font-size: 3rem;
+  margin: auto;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: min(100vh, 40em);
+  padding: auto;
+  align-self: center;
+  margin: auto;
+  padding: auto;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  text-align: center;
+  vertical-align: center;
+  height: auto;
+  margin: 0;
+}
+
+li > span {
+  margin: auto;
+  font-size: 1.5rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 40em;
+  padding: auto;
+  align-self: center;
+  margin: auto;
+  padding: auto;
+}
+
+.slot {
+  margin-block: 0.5em;
+  flex-basis: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
+  text-align: left;
+  vertical-align: baseline;
+}
 
 </style>
