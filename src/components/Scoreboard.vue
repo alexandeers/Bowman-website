@@ -2,7 +2,7 @@
 // import { RouterLink, RouterView } from "vue-router";
 // import HelloWorld from "./components/HelloWorld.vue";
 import Slot from "./Slot.vue";
-import scoreboard from "C:/Users/04ALSA27/Documents/GitHub/Bowman-website/src/assets/scoreboard.json"
+import scoreboard from "../assets/scoreboard.json"
 
 //Create an array of players from the scoreboard.json file
 const players = scoreboard.players;
